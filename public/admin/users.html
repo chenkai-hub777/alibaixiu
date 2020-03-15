@@ -43,11 +43,13 @@
               <div class="form-group">
                 <label class="form-image">
                   <input id="avatar" type="file">
-                  <img src="../assets/img/default.png">
+                  <img src="../assets/img/default.png" id="prev">
                   <i class="mask fa fa-upload"></i>
                 </label>
               </div>
             </div>
+            <!-- 添加一个隐藏域表单，用来存放头像图片地址 -->
+            <input type="hidden" name="avatar" id="hiddenImg">
             <div class="form-group">
               <label>邮箱</label>
               <input class="form-control" type="email" placeholder="请输入邮箱">
