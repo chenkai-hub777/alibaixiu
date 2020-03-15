@@ -39,4 +39,42 @@ $('#avatar').on('change',function(){
         }
 
     })
-})
+});
+
+// 添加用户功能  给addBtn按钮添加点击事件
+$('#addBtn').on('click',function(){
+    // 先获取到表单提交的数据
+    let userData = $('form').serialize();
+    // console.log(userData)
+    // 发送ajax请求
+    $.ajax({
+        type:'post',
+        url:'/users',
+        data:userData,
+        success:function(res){
+            // 将添加的数据追加到数组中去
+            userAry.push(res);
+            // 渲染页面
+            render();
+            // 清空数据
+            clearData()
+        },
+        error:function(err){
+            console.log(err)
+        }
+        
+    })
+});
+
+// 定义一个函数，用来清空提交后的表单数据
+function clearData(){
+    $('#prev').attr('src','../assets/img/default.png');
+    $('input[type="email"]').val('');
+    $('input[name="nickName"]').val('');
+    $('input[name="password"]').val('');
+    $('input[name="status"]').prop('checked',false);
+    $('input[name="status"]').prop('checked',false);
+    $('input[name="role"]').prop('checked',false);
+    $('input[name="role"]').prop('checked',false);
+}
+
