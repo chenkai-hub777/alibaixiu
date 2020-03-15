@@ -78,3 +78,28 @@ function clearData(){
     $('input[name="role"]').prop('checked',false);
 }
 
+// 点击编辑按钮，把用户信息显示在左侧页面里面  要使用事件委托
+$('tbody').on('click','#edit',function(){
+    // 先把添加用户改为编辑用户
+    $('form h2').html('编辑用户')
+    // 再把用户信息显示在左侧表单中
+    let tr = $(this).parents('tr');
+    $('#prev').attr('src',tr.find('img').attr('src'));
+    $('input[type="email"]').val(tr.children().eq(2).text());
+    $('input[name="nickName"]').val(tr.children().eq(3).text());
+    if(tr.children().eq(4).text() == '激活'){
+        $('#status1').prop('checked',true);
+    }else{
+        $('#status0').prop('checked',true);
+    }
+    if(tr.children().eq(5).text() == '超级管理员'){
+        $('#admin').prop('checked',true);
+    }else{
+        $('#normal').prop('checked',true);
+
+    }
+    // 点击编辑按钮，把添加用户按钮隐藏起来，把编辑用户按钮显示出来
+    $('#addBtn').hide();
+    $('#editBtn').show();
+})
+
