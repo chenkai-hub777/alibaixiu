@@ -162,7 +162,63 @@ $('tbody').on('click','.del',function(){
             }
         })
     }
+});
+
+// 全选按钮
+$('#checkAll').on('change',function(){
+    $('tbody input').prop('checked',$(this).prop('checked'));
+    if($(this).prop('checked')){
+        $('#delMany').show();
+    }else{
+        $('#delMany').hide();
+    }
 })
 
+// 复选按钮  使用事件委托
+$('tbody').on('click','.check',function(){
+    // 当选择的按钮长度等于所有复选按钮的长度时  全选按钮就选中
+    let length = $('tbody input').length;
+    let checkLength = $('tbody input:checked').length;
+    // console.log(length,checkLength);
+    $('#checkAll').prop('checked',length === checkLength);
+    // 当选中状态的按钮长度大于1时，显示批量删除按钮  否则隐藏
+    if(checkLength > 1){
+        $('#delMany').show();
+    }else{
+        $('#delMany').hide();
+    }
+})
+
+// 点击批量删除按钮  获取选中按钮里面的 id  发送ajax请求
+$('#delMany').on('click',function(){
+    // 定义一个空数组 用来存放选中状态的id
+    let arr = [];
+    // 我们需要获取被选中的元素  拿到它们的id值 但是id的值 在  需要遍历选中的元素的tr上面  在jQuery中学习的each方法
+    $('.check:checked').each(function(index,item){
+        // 获取被选中元素的id  把它push到arr里面去
+        let id =  $(item).parents('tr').attr('data-id');
+        arr.push(id);
+    });
+    // 在发送ajax请求之前，先提醒用户是否确认删除
+    if(confirm('确定都要删除吗?')){
+        // 确定删除后，发送ajax请求
+        $.ajax({
+            type:'delete',
+            // 在这里把数组里面的id使用 join 方法 用 - 进行拼接成字符串
+            url:'/users/' + arr.join('-'),
+            success:function(res){
+                // 返回回来的是一个数组  里面是对象  就是被删除的元素 先遍历数组 同样根据索引 删除 userArr 里面的元素 再render
+                res.forEach(item => {
+                    let index = userAry.findIndex(ele => item._id === ele._id);
+                    // 根据索引，每次循环删除一个  最后再重新渲染页面
+                    userAry.splice(index,1);
+                    render();
+                    $('#delMany').hide();
+                })
+
+            }
+        })
+    }
+})
 
 
