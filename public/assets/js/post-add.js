@@ -119,4 +119,5 @@ $('#edit').on('click',function(){
             location.href = 'posts.html'
         }
     })
-})
+});
+
