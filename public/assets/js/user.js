@@ -130,7 +130,7 @@ $('#editBtn').on('click',function(){
             $('form h2').text('添加新用户');
             // 调用清除数据函数
             clearData()
-            $('#hiddenImg').val();
+            $('#hiddenImg').val('');
             // 将email和password输入框设为启用
             $('input[type="email"]').prop('disabled',false).val('');
             $('input[name="password"]').prop('disabled',false).val('');
