@@ -13,4 +13,19 @@ $('#logoutBtn').on('click',function(){
         }
       })
     }
+  });
+
+  // console.log(userId)
+  // 向服务器端发送请求，索要登录信息
+  $.ajax({
+    type:'get',
+    url:'/users/' + userId,
+    success:function(res){
+      console.log(res);
+      // 获取头像并显示
+      $('.profile .avatar').attr('src',res.avatar);
+      // 显示用户名
+      $('.profile h3').text(res.nickName)
+    }
+
   })

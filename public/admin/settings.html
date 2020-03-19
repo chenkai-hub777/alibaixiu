@@ -38,46 +38,53 @@
         <div class="form-group">
           <label for="site_logo" class="col-sm-2 control-label">网站图标</label>
           <div class="col-sm-6">
-            <input id="site_logo" name="site_logo" type="hidden">
+            
             <label class="form-image">
               <input id="logo" type="file">
-              <img src="../assets/img/logo.png">
+              <img src="../assets/img/logo.png" id="logoImg">
               <i class="mask fa fa-upload"></i>
             </label>
+            <!-- logo隐藏域 -->
+            <input id="hidden" name="logo" type="hidden">
           </div>
         </div>
         <div class="form-group">
           <label for="site_name" class="col-sm-2 control-label">站点名称</label>
           <div class="col-sm-6">
-            <input id="site_name" name="site_name" class="form-control" type="type" placeholder="站点名称">
+            <input id="site_name" name="title" class="form-control" type="type" placeholder="站点名称">
           </div>
         </div>
         <div class="form-group">
           <label for="site_description" class="col-sm-2 control-label">站点描述</label>
           <div class="col-sm-6">
-            <textarea id="site_description" name="site_description" class="form-control" placeholder="站点描述" cols="30" rows="6"></textarea>
+            <textarea id="site_description" name="description" class="form-control" placeholder="站点描述" cols="30" rows="6"></textarea>
           </div>
         </div>
         <div class="form-group">
           <label for="site_keywords" class="col-sm-2 control-label">站点关键词</label>
           <div class="col-sm-6">
-            <input id="site_keywords" name="site_keywords" class="form-control" type="type" placeholder="站点关键词">
+            <input id="site_keywords" name="keywords" class="form-control" type="type" placeholder="站点关键词">
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 control-label">评论</label>
           <div class="col-sm-6">
             <div class="checkbox">
-              <label><input id="comment_status" name="comment_status" type="checkbox" checked>开启评论功能</label>
+              <label><input id="comment_status" type="checkbox" checked>开启评论功能</label>
             </div>
+            <!-- 用隐藏域来向服务器发送开启评论功能的value值  要么是true 要么是 false -->
+            <input type="hidden" name="comment" id="comment">
             <div class="checkbox">
-              <label><input id="comment_reviewed" name="comment_reviewed" type="checkbox" checked>评论必须经人工批准</label>
+              <label><input id="comment_reviewed"  type="checkbox" checked>评论必须经人工批准</label>
             </div>
+            <!-- 用隐藏域来向服务器发送开启评论必须经人工批准的value值  要么是true 要么是 false -->
+            <input type="hidden" name="review" id="review">
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-6">
-            <button type="submit" class="btn btn-primary">保存设置</button>
+            <!-- <button type="submit" class="btn btn-primary">保存设置</button> -->
+            <button type="button" class="btn btn-primary" id="save">保存设置</button>
           </div>
         </div>
       </form>
